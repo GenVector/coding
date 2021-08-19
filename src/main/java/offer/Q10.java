@@ -36,6 +36,8 @@ class Fibonacci {
         }
         return n1;
     }
+    //测试push
+    
 
 
 }
