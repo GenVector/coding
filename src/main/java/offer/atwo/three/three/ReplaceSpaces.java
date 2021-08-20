@@ -11,12 +11,13 @@ public class ReplaceSpaces {
 
 //合并数组
 //考虑从后往前,可减少移动次数
+//等同于借助了额外空间
 class MergeArr {
 
     public static void main(String[] args) {
 //        int[] arr = new int[5];
 //        System.out.println(arr[0]);
-        int[] arrA = new int[10];
+        int[] arrA = new int[8];
         arrA[0] = 4;
         arrA[1] = 5;
         arrA[2] = 9;
@@ -35,7 +36,7 @@ class MergeArr {
         while (i >= 0 || j >= 0) {
             if (j < 0) {
                 arrA[i + j + 1] = arrA[i];
-                arrA[i] = -1;
+                //arrA[i] = -1;
                 i--;
                 continue;
             } else if (i < 0) {
@@ -45,11 +46,11 @@ class MergeArr {
             }
             if (arrA[i] > arrB[j]) {
                 arrA[i + j + 1] = arrA[i];
-                arrA[i] = -1;
+                //arrA[i] = -1;
                 i--;
             } else {
                 arrA[i + j + 1] = arrB[j];
-                arrB[j] = -1;
+                //arrB[j] = -1;
                 j--;
             }
         }

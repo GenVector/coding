@@ -1,41 +1,47 @@
 package offer;
 
 public class Q10 {
+    public static void main(String[] args) {
+        //int[] arr = {6, 7, 8, 12, 3, 4, 5};
+        int[] arr = {1, 1, 1, 1, 1, 1};
+        System.out.println(MinNumberInRotatedArray.minNumberInRotateArray(arr));
+    }
+
 }
 
-class Fibonacci {
-    public static void main(String[] args) {
-        System.out.println(fib2(100));
-    }
+class MinNumberInRotatedArray {
 
-    //递归实现
-    public static long fibonacci(long n) {
-        if (n == 0) {
-            return 0;
+    public static int minNumberInRotateArray(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            throw new RuntimeException("arr error");
         }
-        if (n == 1) {
-            return 1;
+        if (arr[arr.length - 1] > arr[0]) {
+            return arr[0];
         }
-        return fibonacci(n - 1) + fibonacci(n - 2);
-    }
+        if (arr[arr.length - 1] == arr[0] && arr[0] == arr[(arr.length - 1) / 2]) {
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    return arr[i + 1];
+                }
+            }
+            return arr[0];
+        }
+        int low = 0;
+        int high = arr.length - 1;
 
-    //for循环实现
-    public static long fib2(long n) {
-        if (n == 0) {
-            return 0;
+        while (low < high) {
+            if (high - low == 1) {
+                break;
+            }
+            int mid = (high + low) / 2;
+            if (arr[mid] > arr[high]) {
+                low = mid;
+            }
+            if (arr[mid] < arr[low]) {
+                high = mid;
+            }
         }
-        if (n == 1) {
-            return 1;
-        }
-        long n1 = 1;
-        long n2 = 0;
-        for (long i = 2; i <= n; i++) {
-            long tem = n1;
-            n1 = n1 + n2;
-            n2 = tem;
-        }
-        return n1;
+        return arr[high];
     }
-
 
 }

@@ -1,8 +1,8 @@
-package offer.atwo.three;
+package offer;
 
 import java.util.Stack;
 
-public class Q9 {
+public class Q8 {
     public static void main(String[] args) {
 
     }
