@@ -7,6 +7,12 @@
     <groupId>org.example</groupId>
     <artifactId>coding</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-gwt</artifactId>
+            <version>30.1.1-jre</version>
+        </dependency>
+    </dependencies>
 
 </project>
