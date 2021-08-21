@@ -1,0 +1,65 @@
+package arr;
+
+public class MaxSubArr {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 4, 3, 2, -56, 3, 11, 4, -3, -3, 4, 8, -11, 9, 12};
+        maxSubArr(arr);
+        maxSubArr2(arr);
+
+    }
+
+    //动态规划
+    public static void maxSubArr(int[] arr) {
+        int max = arr[0];
+        int sum = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (sum > 0) {
+                sum += arr[i];
+            } else {
+                sum = arr[i];
+            }
+            max = max(arr[i], sum, max);
+        }
+        System.out.println(max);
+    }
+
+    //穷举法
+    public static void maxSubArr2(int[] arr) {
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int sum = 0;
+            for (int j = i; j < arr.length; j++) {
+                sum += arr[j];
+                max = Math.max(max, sum);
+            }
+        }
+        System.out.println(max);
+    }
+
+    public static int max(int a, int b, int c) {
+        if (a > b) {
+            return Math.max(a, c);
+        } else {
+            return Math.max(b, c);
+        }
+    }
+
+
+    //获取和右侧子数组最大差值
+    public static void getMaxRightArrSub(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            throw new RuntimeException("arr error");
+        }
+        int max = Math.max(arr[0], arr[1]);
+        int diff = arr[0] - arr[1];
+        for (int i = 2; i < arr.length; i++) {
+            diff = Math.max(diff, max - arr[i]);
+            max = Math.max(max, arr[i]);
+
+        }
+        System.out.println(diff);
+
+    }
+
+
+}

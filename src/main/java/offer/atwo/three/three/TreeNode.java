@@ -37,6 +37,8 @@ public class TreeNode {
 
         System.out.println("postOrder");
         postOrder(root);
+        System.out.println();
+        postOrder2(root);
         System.out.println("levelOrder");
         levelOrder(root);
     }
@@ -52,18 +54,18 @@ public class TreeNode {
     }
 
     public static void preOrder2(TreeNode treeNode) {
-        System.out.println("preOrder2 ");
-        Stack<TreeNode> list = new Stack<>();
-        list.add(treeNode);
-        while (list.size() > 0) {
-            TreeNode tem = list.pop();
-            System.out.print(tem.val + " | ");
-            if (tem.right != null) {
-                list.push(tem.right);
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(treeNode);
+        while (!stack.empty()) {
+            TreeNode node = stack.pop();
+            System.out.print(node.val + " | ");
+            if (node.right != null) {
+                stack.push(node.right);
             }
-            if (tem.left != null) {
-                list.push(tem.left);
+            if (node.left != null) {
+                stack.push(node.left);
             }
+
         }
     }
 
@@ -84,17 +86,15 @@ public class TreeNode {
              4    7
            9
          10
-     */
+    */
     public static void inOrder2(TreeNode node) {
-        System.out.println("inOrder2 ");
-
-        Stack<TreeNode> list = new Stack<>();
-        while (list.size() > 0 || node != null) {
+        Stack<TreeNode> stack = new Stack<>();
+        while (node != null || !stack.empty()) {
             if (node != null) {
-                list.push(node);
+                stack.push(node);
                 node = node.left;
             } else {
-                node = list.pop();
+                node = stack.pop();
                 System.out.print(node.val + " | ");
                 node = node.right;
             }
@@ -110,9 +110,35 @@ public class TreeNode {
         }
         System.out.print(node.val + " | ");
     }
-
+/*
+          1
+     2        5
+  8    3         6
+         4    7
+       9
+     10
+*/
     public static void postOrder2(TreeNode node) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = node;
+        TreeNode pre = null;
+        stack.push(node);
+        while (!stack.empty()) {
+            cur = stack.peek();
+            if (cur.left != null && pre != cur.left && pre != cur.right) {
+                stack.push(cur.left);
+                pre = cur;
+            } else if (cur.right != null && pre != cur.right) {
+                stack.push(cur.right);
+                pre = cur;
+            } else {
+                cur = stack.pop();
+                pre = cur;
+                System.out.print(cur.val + " | ");
 
+            }
+
+        }
     }
 
     public static void levelOrder(TreeNode node) {
