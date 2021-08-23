@@ -3,6 +3,7 @@ package thread;
 import com.google.common.util.concurrent.*;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class ExecutorServiceTest {
 
@@ -22,14 +23,23 @@ public class ExecutorServiceTest {
 
     //自定义线程池
     //参数说明
-    //corePoolSize:核心线程池数量int
+    //corePoolSize:核心线程池数量int 即使没有任务提交,也始终存在的线程数。所以线程池是有消耗的。但是线程不会在线程池创建时创建。而是有任务提交时创建
     //maximumPoolSize:最大线程池大小
     //keepAliveTime:线程最大空闲时间
     //TimeUnit:时间单位
-    //ThreadFactory:线程工厂
+    //ThreadFactory:线程工厂 是否为守护线程等
     //workQueue:线程等待列队
-    //handle:拒绝策略
-    private static ThreadPoolExecutor customExecutor = new ThreadPoolExecutor(3, 5, 50, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(20));
+    //handle:拒绝策略 |
+    //largestPoolSize 线程池中出现过线程的最大值
+    //poolSize 当前线程池中线程数量
+    static AtomicLong threadId = new AtomicLong();
+    static ThreadFactory threadFactory = r -> {
+        Thread thread = new Thread(r, "groupId-" + System.currentTimeMillis() + threadId.getAndIncrement());
+        thread.setDaemon(true);
+        return thread;
+    };
+    private static ThreadPoolExecutor customExecutor = new ThreadPoolExecutor(5, 5, 50,
+            TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(20));
 
     private static void customExecutor() throws InterruptedException, ExecutionException {
         Future<Integer> res = customExecutor.submit(callable);
@@ -50,13 +60,8 @@ public class ExecutorServiceTest {
         //没事一定别用它
         ThreadPoolExecutor cachePool1 = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
                 60L, TimeUnit.SECONDS,
-                new SynchronousQueue<Runnable>(), r -> {
-            Thread thread = new Thread();
-            thread.setDaemon(true);
-            return thread;
-        });
+                new SynchronousQueue<Runnable>());
         cachePool1.submit(callable);
-
     }
 
     private static void singleExecutor() {
@@ -102,8 +107,9 @@ public class ExecutorServiceTest {
     }
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        workStealingPool();
-        Thread.sleep(2000L);
+        customExecutor();
+        Thread.sleep(3000L);
+        customExecutor();
         //System.gc();
 
     }

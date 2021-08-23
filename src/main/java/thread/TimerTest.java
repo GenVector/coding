@@ -71,15 +71,13 @@ public class TimerTest {
         timerTest.timer.schedule(timerTest.task2, 1000L, 500L);
         timerTest.timer.scheduleAtFixedRate(timerTest.task3, 200, 1500L);
         timerTest.timer.scheduleAtFixedRate(timerTest.task4, 800, 200L);
-        timerTest.task2.cancel();
-        timerTest.task2.cancel();
-        timerTest.task2.cancel();
-        timerTest.task2.cancel();
 
         System.out.println(Thread.currentThread().getName() + " | " + System.currentTimeMillis());
         Thread.sleep(3000L);
         //取消任务
         timerTest.task.cancel();
         timerTest.task2.cancel();
+        Thread.sleep(3000L);
+
     }
 }

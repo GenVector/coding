@@ -22,21 +22,18 @@ public class CallbackTest {
     private static void futureTask() throws InterruptedException, ExecutionException {
         //FutureTask;
         //Callable;
-        Callable<Integer> callable1 = new Callable<Integer>() {
-            @Override
-            public Integer call() {
-                try {
-                    for (int i = 0; i < 10; i++) {
-                        System.out.println(Thread.currentThread().getName() + "num -- " + i);
-                        Thread.sleep(100);
-                    }
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    System.out.println(Thread.currentThread().getName() + "-- interrupt ");
-                    return 0;
+        Callable<Integer> callable1 = () -> {
+            try {
+                for (int i = 0; i < 10; i++) {
+                    System.out.println(Thread.currentThread().getName() + "num -- " + i);
+                    Thread.sleep(100);
                 }
-                return 1;
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.out.println(Thread.currentThread().getName() + "-- interrupt ");
+                return 0;
             }
+            return 1;
         };
 
         FutureTask<Integer> futureTask = new FutureTask<>(callable1);
@@ -108,7 +105,9 @@ public class CallbackTest {
 
         //Futures.addCallback(hFuture, futureCallback, gPool);
 
-        hFuture.addListener(()->{System.out.println("success");},gPool);
+        hFuture.addListener(() -> {
+            System.out.println("success");
+        }, gPool);
 
     }
 

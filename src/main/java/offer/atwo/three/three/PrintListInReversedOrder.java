@@ -24,7 +24,7 @@ public class PrintListInReversedOrder {
 
     //利用栈后进先出
     public static ListNode reverse(ListNode node) {
-        Stack<ListNode> stack = new Stack<>();
+        Stack<ListNode> stack = new Stack<ListNode>();
         while (node != null) {
             stack.push(node);
             node = node.next;

@@ -28,8 +28,9 @@ public class ScheduledExecutorServiceTest {
 
     private static void singleThreadScheduledExecutor() {
         ScheduledExecutorService singleThreadScheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+        //DelayedWorkQueue delayedWorkQueue = new DelayedWorkQueue();
     }
 
-    //对比一下和Timer原理上的区别
+    //对比一下和Timer原理上的区别。其实Timer就是一个单线程的线程执行器。复用一个线程来提交任务。
     //DelayedWorkQueue
 }
