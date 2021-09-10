@@ -6,8 +6,8 @@ class Sort {
     public static void main(String[] args) {
 
         int[] arr = {6, 4, 8, 6, 1, 4, 12, 3, 6, 8, 9, 22, 2};
-        insertSort(arr);
-//        quickSort(arr);
+//        insertSort(arr);
+        quickSort(arr);
 //        popSort(arr);
 //        selectSort(arr);
         Arrays.stream(arr).forEach(a -> System.out.print(a + " | "));

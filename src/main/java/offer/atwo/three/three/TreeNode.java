@@ -24,6 +24,7 @@ public class TreeNode {
     TreeNode left;
     TreeNode right;
 
+
     public static void main(String[] args) {
         TreeNode root = newTree1();
         System.out.println(level(root));
@@ -84,8 +85,9 @@ public class TreeNode {
          2        5
       8    3         6
              4    7
+            8
            9
-         10
+         10  11
     */
     public static void inOrder2(TreeNode node) {
         Stack<TreeNode> stack = new Stack<>();
