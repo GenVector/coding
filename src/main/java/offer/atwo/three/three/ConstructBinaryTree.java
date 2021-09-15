@@ -83,7 +83,7 @@ public class ConstructBinaryTree {
         leftView(node.right, list, level + 1);
     }
 
-    //打印左视图
+    //打印右视图
     public static void rightViewPrint(TreeNode node) {
         List<TreeNode> list = new ArrayList<>();
         rightView(node, list, 0);

@@ -16,6 +16,17 @@ public class Q11 {
     }
 }
 
+/*
+ * 题目：请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有
+ * 字符的路径。路径可以从矩阵中任意一格开始，每一步可以在矩阵中向左、右、
+ * 上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入
+ * 该格子。例如在下面的3×4的矩阵中包含一条字符串“bfce”的路径（路径中的字
+ * 母用下划线标出）。但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个
+ * 字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。
+ * A B T G
+ * C F C S
+ * J D E H
+ */
 class StringPathInMatrix {
 
     public boolean hasPath(char[] matrix, int rows, int cols, char[] str) {
@@ -36,13 +47,17 @@ class StringPathInMatrix {
         return false;
     }
 
+    //二维数组下标的计算：row*cols+col
     private boolean hasPathCore(char[] matrix, int rows, int cols, int row, int col, char[] str, int pathLength,
                                 boolean[] isVisited) {
-        if (row < 0 || col < 0 || row >= rows || col >= cols || isVisited[row * cols + col] == true
-                || str[pathLength] != matrix[row * cols + col])
+        if (row < 0 || col < 0 || row >= rows || col >= cols || isVisited[row * cols + col]
+                || str[pathLength] != matrix[row * cols + col]) {
             return false;
-        if (pathLength == str.length - 1)
+
+        }
+        if (pathLength == str.length - 1) {
             return true;
+        }
         boolean hasPath = false;
         isVisited[row * cols + col] = true;
         hasPath = hasPathCore(matrix, rows, cols, row - 1, col, str, pathLength + 1, isVisited)
@@ -62,7 +77,7 @@ class StringPathInMatrix {
         int rows = 3;
         int cols = 4;
         char[] str = "BFCTB".toCharArray();
-        if (hasPath(matrix, rows, cols, str))
+        if (hasPath2(matrix, rows, cols, str))
             System.out.println("Test1 passed.");
         else
             System.out.println("Test1 failed.");
@@ -78,7 +93,7 @@ class StringPathInMatrix {
         int rows = 3;
         int cols = 4;
         char[] str = "BFCE".toCharArray();
-        if (hasPath(matrix, rows, cols, str))
+        if (hasPath2(matrix, rows, cols, str))
             System.out.println("Test2 passed.");
         else
             System.out.println("Test2 failed.");
@@ -90,7 +105,7 @@ class StringPathInMatrix {
         int rows = 0;
         int cols = 0;
         char[] str = "BFCE".toCharArray();
-        if (hasPath(matrix, rows, cols, str))
+        if (hasPath2(matrix, rows, cols, str))
             System.out.println("Test3 passed.");
         else
             System.out.println("Test3 failed.");
@@ -102,7 +117,7 @@ class StringPathInMatrix {
         int rows = 3;
         int cols = 4;
         char[] str = null;
-        if (hasPath(matrix, rows, cols, str))
+        if (hasPath2(matrix, rows, cols, str))
             System.out.println("Test4 passed.");
         else
             System.out.println("Test4 failed.");
@@ -116,7 +131,7 @@ class StringPathInMatrix {
         int rows = 1;
         int cols = 1;
         char[] str = "A".toCharArray();
-        if (hasPath(matrix, rows, cols, str))
+        if (hasPath2(matrix, rows, cols, str))
             System.out.println("Test5 passed.");
         else
             System.out.println("Test5 failed.");
@@ -130,7 +145,7 @@ class StringPathInMatrix {
         int rows = 1;
         int cols = 1;
         char[] str = "B".toCharArray();
-        if (hasPath(matrix, rows, cols, str))
+        if (hasPath2(matrix, rows, cols, str))
             System.out.println("Test6 passed.");
         else
             System.out.println("Test6 failed.");
@@ -146,9 +161,58 @@ class StringPathInMatrix {
         int rows = 3;
         int cols = 4;
         char[] str = "AAAAAAAAAAAA".toCharArray();
-        if (hasPath(matrix, rows, cols, str))
+        if (hasPath2(matrix, rows, cols, str))
             System.out.println("Test7 passed.");
         else
             System.out.println("Test7 failed.");
+    }
+
+    int rows;
+    int cols;
+    int row;
+    int col;
+    int index = row * cols + col;
+
+    public static boolean hasPath2(char[] strs, int rows, int cols, char[] path) {
+        if (strs == null || strs.length == 0 || path == null || path.length == 0 || rows == 0 || cols == 0) {
+            return false;
+        }
+        boolean[] isVisited = new boolean[rows * cols + 1];
+        for (boolean a : isVisited) {
+            a = false;
+        }
+        int pathLen = 0;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (core(strs, path, rows, cols, row, col, isVisited, pathLen)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean core(char[] strs, char[] path, int rows, int cols, int row, int col, boolean[] isVisited, int pathLen) {
+        if (strs == null || strs.length == 0 || path == null || path.length == 0 || col < 0 || row < 0 || row >= rows || col >= cols
+                || isVisited[row * cols + col]) {
+            return false;
+        }
+        if (strs[row * cols + col] != path[pathLen]) {
+            return false;
+        }
+        if (pathLen == path.length - 1) {
+            return true;
+        }
+        boolean hasPath = false;
+        isVisited[row * cols + col] = true;
+
+        hasPath = core(strs, path, rows, cols, row, col + 1, isVisited, pathLen + 1) || core(strs, path, rows, cols, row, col - 1, isVisited, pathLen + 1)
+                || core(strs, path, rows, cols, row + 1, col, isVisited, pathLen + 1) || core(strs, path, rows, cols, row - 1, col, isVisited, pathLen + 1);
+
+        if (!hasPath) {
+            isVisited[row * cols + col] = false;
+
+        }
+        return hasPath;
     }
 }

@@ -4,6 +4,10 @@ import java.util.Stack;
 
 import static offer.atwo.three.three.PrintListInReversedOrder.print;
 
+//题目：输入一个链表的头结点，从尾到头反过来打印出每个结点的值。
+class Q5 {
+
+}
 
 public class PrintListInReversedOrder {
 
@@ -19,74 +23,22 @@ public class PrintListInReversedOrder {
 
     //利用栈后进先出
     public static ListNode reverse(ListNode node) {
-        Stack<ListNode> stack = new Stack<ListNode>();
+        Stack<ListNode> stack = new Stack<>();
         while (node != null) {
             stack.push(node);
             node = node.next;
         }
-        if (stack.size() == 0) {
+        if (stack.isEmpty()) {
             throw new RuntimeException("node is null");
         }
         ListNode resNode = stack.pop();
         ListNode tem = resNode;
-        while (stack.size() > 0) {
+        while (!stack.isEmpty()) {
             tem.next = stack.pop();
             tem = tem.next;
         }
         tem.setNext(null);
         return resNode;
-    }
-
-    //递归实现
-    public static ListNode reverse2(ListNode node) {
-        if (node == null) {
-            return null;
-        }
-        if (node.next == null) {
-            return node;
-        }
-        ListNode root = reverse2(node.next);
-        ListNode tem = root;
-//        while (tem.next != null) {
-//            tem = tem.next;
-//        }
-//        tem.setNext(node);
-        node.next.next = node;
-        node.next = null;
-        return root;
-    }
-
-    //三指针标记遍历实现
-    public static ListNode reverse3(ListNode node) {
-        if (node == null) {
-            return null;
-        }
-        ListNode pNode = node;
-        ListNode preNode = null;
-        while (pNode != null) {
-            ListNode nextNode = pNode.next;
-            pNode.next = preNode;
-            preNode = pNode;
-            pNode = nextNode;
-        }
-        return preNode;
-    }
-
-    public static ListNode reverse4(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode rvsHead = reverse4(head.next);
-        head.next.next = head;
-        head.next = null;
-        return rvsHead;
-    }
-
-    public static void main(String[] args) {
-        ListNode listNode = new ListNode(1);
-        listNode.setNext(new ListNode(7)).setNext(new ListNode(2)).setNext(new ListNode(3)).setNext(new ListNode(4)).setNext(new ListNode(5));
-        listNode = reverse2(listNode);
-        print(listNode);
     }
 
 }
@@ -123,12 +75,7 @@ class ReversePrint1 {
 }
 
 class T2 {
-    public static void main(String[] args) {
-        ListNode listNode = new ListNode(1);
-        listNode.setNext(new ListNode(7)).setNext(new ListNode(2)).setNext(new ListNode(3)).setNext(new ListNode(4)).setNext(new ListNode(5));
-        listNode = reverse2(listNode);
-        print(listNode);
-    }
+
 
     public static ListNode reverse(ListNode node) {
         Stack<ListNode> nodes = new Stack<>();

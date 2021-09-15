@@ -19,6 +19,7 @@ public class Q18 {
     }
 }
 
+//删除链表中的重复节点
 class DeleteNodeInList {
     public static void deleteNode(ListNode head, ListNode pToBeDeleted) {
         if (head == null || pToBeDeleted == null) {

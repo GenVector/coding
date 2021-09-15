@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class TreeNode {
-    int val;
+    public int val;
 
     public TreeNode(int val) {
         this.val = val;
@@ -21,8 +21,8 @@ public class TreeNode {
         return right;
     }
 
-    TreeNode left;
-    TreeNode right;
+    public TreeNode left;
+    public TreeNode right;
 
 
     public static void main(String[] args) {
@@ -112,14 +112,15 @@ public class TreeNode {
         }
         System.out.print(node.val + " | ");
     }
-/*
-          1
-     2        5
-  8    3         6
-         4    7
-       9
-     10
-*/
+
+    /*
+              1
+         2        5
+      8    3         6
+             4    7
+           9
+         10
+    */
     public static void postOrder2(TreeNode node) {
         Stack<TreeNode> stack = new Stack<>();
         TreeNode cur = node;
