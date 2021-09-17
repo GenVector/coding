@@ -34,9 +34,7 @@ class StringPathInMatrix {
             return false;
         }
         boolean[] isVisited = new boolean[rows * cols];
-        for (boolean v : isVisited) {
-            v = false;
-        }
+
         int pathLength = 0;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
@@ -77,7 +75,7 @@ class StringPathInMatrix {
         int rows = 3;
         int cols = 4;
         char[] str = "BFCTB".toCharArray();
-        if (hasPath2(matrix, rows, cols, str))
+        if (hasPath(matrix, rows, cols, str))
             System.out.println("Test1 passed.");
         else
             System.out.println("Test1 failed.");
@@ -93,7 +91,7 @@ class StringPathInMatrix {
         int rows = 3;
         int cols = 4;
         char[] str = "BFCE".toCharArray();
-        if (hasPath2(matrix, rows, cols, str))
+        if (hasPath(matrix, rows, cols, str))
             System.out.println("Test2 passed.");
         else
             System.out.println("Test2 failed.");
@@ -105,7 +103,7 @@ class StringPathInMatrix {
         int rows = 0;
         int cols = 0;
         char[] str = "BFCE".toCharArray();
-        if (hasPath2(matrix, rows, cols, str))
+        if (hasPath(matrix, rows, cols, str))
             System.out.println("Test3 passed.");
         else
             System.out.println("Test3 failed.");
@@ -117,7 +115,7 @@ class StringPathInMatrix {
         int rows = 3;
         int cols = 4;
         char[] str = null;
-        if (hasPath2(matrix, rows, cols, str))
+        if (hasPath(matrix, rows, cols, str))
             System.out.println("Test4 passed.");
         else
             System.out.println("Test4 failed.");
@@ -131,7 +129,7 @@ class StringPathInMatrix {
         int rows = 1;
         int cols = 1;
         char[] str = "A".toCharArray();
-        if (hasPath2(matrix, rows, cols, str))
+        if (hasPath(matrix, rows, cols, str))
             System.out.println("Test5 passed.");
         else
             System.out.println("Test5 failed.");
@@ -145,7 +143,7 @@ class StringPathInMatrix {
         int rows = 1;
         int cols = 1;
         char[] str = "B".toCharArray();
-        if (hasPath2(matrix, rows, cols, str))
+        if (hasPath(matrix, rows, cols, str))
             System.out.println("Test6 passed.");
         else
             System.out.println("Test6 failed.");
@@ -161,7 +159,7 @@ class StringPathInMatrix {
         int rows = 3;
         int cols = 4;
         char[] str = "AAAAAAAAAAAA".toCharArray();
-        if (hasPath2(matrix, rows, cols, str))
+        if (hasPath(matrix, rows, cols, str))
             System.out.println("Test7 passed.");
         else
             System.out.println("Test7 failed.");
@@ -178,9 +176,7 @@ class StringPathInMatrix {
             return false;
         }
         boolean[] isVisited = new boolean[rows * cols + 1];
-        for (boolean a : isVisited) {
-            a = false;
-        }
+
         int pathLen = 0;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
@@ -216,3 +212,4 @@ class StringPathInMatrix {
         return hasPath;
     }
 }
+
