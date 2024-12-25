@@ -2,9 +2,11 @@ package collection;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
@@ -81,5 +83,21 @@ class MapTest {
 
         ConcurrentHashMap<String, String> concurrentHashMap = new ConcurrentHashMap<>();
         concurrentHashMap.put("3", "c");
+
+    }
+
+
+}
+
+class HashMapTest {
+    public static void main(String[] args) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(null, null);
+        hashMap.put("1", "a");
+        hashMap.put("2", "b");
+        hashMap.put("3", null);
+        for (Map.Entry<String, String> entry : hashMap.entrySet()) {
+            System.out.println(entry.getKey() + "=" + entry.getValue());
+        }
     }
 }
