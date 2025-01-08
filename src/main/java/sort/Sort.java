@@ -5,11 +5,12 @@ import java.util.Arrays;
 class Sort {
     public static void main(String[] args) {
 
-        int[] arr = {6, 4, 8, 6, 1, 4, 12, 3, 6, 8, 9, 22, 2};
+        int[] arr = {6, 4, 8, 6, 5, 2, 1, 12, 3, 6};
 //        insertSort(arr);
-        quickSort(arr);
+//        quickSort(arr);
 //        popSort(arr);
 //        selectSort(arr);
+        mergeSort(arr);
         Arrays.stream(arr).forEach(a -> System.out.print(a + " | "));
     }
 
@@ -99,7 +100,27 @@ class Sort {
         int mid = (left + right) / 2;
         mergeSort(arr, left, mid);
         mergeSort(arr, mid + 1, right);
-        mergeArray(arr, left, mid + 1, right);
+        mergeArr(arr, left, mid + 1, right);
+
+    }
+
+    public static void mergeArr(int[] arr, int left, int right, int mid) {
+        for (int i = left; i < mid; i++) {
+            if (arr[i] < arr[mid]) {
+                continue;
+            }
+            int temp = arr[i];
+            arr[i] = arr[mid];
+            arr[mid] = temp;
+            int j = mid;
+            while (j < right - 1 && arr[j] > arr[j + 1]) {
+                int tem = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = tem;
+                j++;
+            }
+
+        }
 
     }
 
