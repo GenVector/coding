@@ -47,7 +47,11 @@ public class PrintListInReversedOrder {
 class ReversePrint1 {
     public static void main(String[] args) {
         ListNode listNode = new ListNode(1);
-        listNode.setNext(new ListNode(7)).setNext(new ListNode(2)).setNext(new ListNode(3)).setNext(new ListNode(4)).setNext(new ListNode(5));
+        listNode.setNext(new ListNode(7))
+                .setNext(new ListNode(2))
+                .setNext(new ListNode(3))
+                .setNext(new ListNode(4))
+                .setNext(new ListNode(5));
         reversePrint2(listNode);
     }
 

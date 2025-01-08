@@ -96,6 +96,7 @@ class HashMapTest {
         hashMap.put("1", "a");
         hashMap.put("2", "b");
         hashMap.put("3", null);
+        hashMap.put(null, "c");
         for (Map.Entry<String, String> entry : hashMap.entrySet()) {
             System.out.println(entry.getKey() + "=" + entry.getValue());
         }

@@ -1,12 +1,8 @@
-package tree;
+package tree.rbtree;
 
 /**
  * Java 语言: 红黑树
- *
- * @author skywang
- * @date 2013/11/07
  */
-
 public class RBTree<T extends Comparable<T>> {
 
     private RBTNode<T> mRoot;    // 根结点

@@ -1,4 +1,4 @@
-package offer.atwo.three.three;
+package tree.btree;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -6,6 +6,9 @@ import java.util.Stack;
 
 public class TreeNode {
     public int val;
+    public TreeNode left;
+    public TreeNode right;
+
 
     public TreeNode(int val) {
         this.val = val;
@@ -20,9 +23,6 @@ public class TreeNode {
         this.right = right;
         return right;
     }
-
-    public TreeNode left;
-    public TreeNode right;
 
 
     public static void main(String[] args) {

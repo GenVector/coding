@@ -1,10 +1,10 @@
 package offer;
 
-import offer.atwo.three.three.TreeNode;
+import tree.btree.TreeNode;
 
 import java.util.Stack;
 
-import static offer.atwo.three.three.TreeNode.newTree1;
+import static tree.btree.TreeNode.newTree1;
 
 public class Q34 {
 }

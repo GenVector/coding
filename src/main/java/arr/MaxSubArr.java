@@ -8,22 +8,30 @@ public class MaxSubArr {
 
     }
 
-    //动态规划
+    // 动态规划
     public static void maxSubArr(int[] arr) {
+        // 初始化最大值为数组的第一个元素
         int max = arr[0];
+        // 初始化当前子数组和为数组的第一个元素
         int sum = arr[0];
+        // 遍历数组
         for (int i = 1; i < arr.length; i++) {
+            // 如果当前子数组和大于0，则继续累加当前元素
             if (sum > 0) {
                 sum += arr[i];
             } else {
+                // 如果当前子数组和小于等于0，则重新开始计算新的子数组和
                 sum = arr[i];
             }
+            // 更新最大值
             max = max(arr[i], sum, max);
         }
+        // 输出最大值
         System.out.println(max);
     }
 
-    //穷举法
+
+    // 穷举法
     public static void maxSubArr2(int[] arr) {
         int max = 0;
         for (int i = 0; i < arr.length; i++) {
@@ -45,7 +53,7 @@ public class MaxSubArr {
     }
 
 
-    //获取和右侧子数组最大差值
+    // 获取和右侧子数组最大差值
     public static void getMaxRightArrSub(int[] arr) {
         if (arr == null || arr.length < 2) {
             throw new RuntimeException("arr error");

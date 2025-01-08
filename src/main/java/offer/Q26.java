@@ -1,6 +1,6 @@
 package offer;
 
-import offer.atwo.three.three.TreeNode;
+import tree.btree.TreeNode;
 
 public class Q26 {
 }

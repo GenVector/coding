@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class SynchronizedTest {
 
     public static void main(String[] args) {
@@ -15,11 +16,14 @@ public class SynchronizedTest {
         Integer e = 321;
         Integer f = 321;
         Long g = 3L;
+        int h = 321;
         System.out.println(c == d);
         System.out.println(e == f);
+        System.out.println(e == h);
         System.out.println(c == (a + b));
         System.out.println(c.equals(a + b));
         System.out.println(g == (a + b));
+        System.out.println(g.equals(a + b));
         System.out.println(g.equals(a + b));
         List<String> strings = Lists.newArrayList("1", "2");
         String[] strings1 = strings.stream().toArray(String[]::new);

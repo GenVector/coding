@@ -17,4 +17,14 @@ public class ListNode {
         this.next = next;
         return next;
     }
+
+    public static void reversePrint(ListNode node) {
+        if (node == null) {
+            return;
+        }
+        reversePrint(node.next);
+        System.out.print(node.val + "->");
+    }
+
+
 }
