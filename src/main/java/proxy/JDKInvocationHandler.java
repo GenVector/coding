@@ -50,12 +50,12 @@ class Test01 {
         Class[] interfaces = realUserService.getClass().getInterfaces();
 
         // 创建InvocationHandler对象（动态代理的执行逻辑）
-        JDKInvocationHandler h = new JDKInvocationHandler(realUserService);
+        JDKInvocationHandler jdkInvocationHandler = new JDKInvocationHandler(realUserService);
         for (Class c : interfaces) {
         }
 
         // 创建一个代理对象（动态代理对象）
-        UserService userServiceProxy = (UserService) Proxy.newProxyInstance(classLoader, interfaces, h);
+        UserService userServiceProxy = (UserService) Proxy.newProxyInstance(classLoader, interfaces, jdkInvocationHandler);
 
         System.out.println(userServiceProxy instanceof UserService);
         System.out.println(userServiceProxy instanceof UserServiceImpl);

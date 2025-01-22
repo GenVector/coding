@@ -104,7 +104,7 @@ class Sort {
 
     }
 
-    public static void mergeArr(int[] arr, int left, int right, int mid) {
+    public static void mergeArr(int[] arr, int left, int mid, int right) {
         for (int i = left; i < mid; i++) {
             if (arr[i] < arr[mid]) {
                 continue;
@@ -113,7 +113,7 @@ class Sort {
             arr[i] = arr[mid];
             arr[mid] = temp;
             int j = mid;
-            while (j < right - 1 && arr[j] > arr[j + 1]) {
+            while (j < right && arr[j] > arr[j + 1]) {
                 int tem = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = tem;

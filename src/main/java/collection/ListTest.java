@@ -100,5 +100,11 @@ class HashMapTest {
         for (Map.Entry<String, String> entry : hashMap.entrySet()) {
             System.out.println(entry.getKey() + "=" + entry.getValue());
         }
+
+        String key = "InstantMessage";
+        int h;
+        int hash = (h = key.hashCode()) ^ (h >>> 16);
+
+        System.out.println(hash);
     }
 }
