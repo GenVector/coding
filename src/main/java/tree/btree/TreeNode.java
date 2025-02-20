@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class TreeNode {
-    public int val;
+    public Integer val;
     public TreeNode left;
     public TreeNode right;
 

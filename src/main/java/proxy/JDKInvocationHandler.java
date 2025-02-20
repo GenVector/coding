@@ -21,7 +21,7 @@ public class JDKInvocationHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
+        System.out.println(method.getName() + "方法开始执行");
         long begin = System.currentTimeMillis();
 
         // 真实业务对象当前的执行方法(基于反射的方式)
@@ -30,7 +30,7 @@ public class JDKInvocationHandler implements InvocationHandler {
 
         long end = System.currentTimeMillis();
 
-        System.out.println("方法执行耗时" + (end - begin) + "毫秒！");
+        System.out.println(method.getName() + "方法执行耗时" + (end - begin) + "毫秒！");
 
         return returnValue;
 
@@ -55,16 +55,24 @@ class Test01 {
         }
 
         // 创建一个代理对象（动态代理对象）
-        UserService userServiceProxy = (UserService) Proxy.newProxyInstance(classLoader, interfaces, jdkInvocationHandler);
+        UserService userServiceProxy = (UserService) Proxy.newProxyInstance(classLoader,
+                interfaces,
+                jdkInvocationHandler);
 
         System.out.println(userServiceProxy instanceof UserService);
         System.out.println(userServiceProxy instanceof UserServiceImpl);
+        // 二次代理
+        JDKInvocationHandler jdkInvocationHandler2 = new JDKInvocationHandler(userServiceProxy);
+        // 二次代理对象
+        UserService userServiceProxy2 = (UserService) Proxy.newProxyInstance(classLoader,
+                interfaces,
+                jdkInvocationHandler2);
 
-        // 调用方法
         userServiceProxy.createUser(18, "张睿泽");
-
         userServiceProxy.update("张三");
-        String name = userServiceProxy.select();
-        System.out.println(name);
+        System.out.println("----------userServiceProxy2-------------");
+        // 调用方法
+        userServiceProxy2.createUser(18, "张睿泽");
+        userServiceProxy2.update("张三");
     }
 }
