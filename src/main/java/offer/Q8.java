@@ -4,12 +4,17 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+/**
+ * 利用两个栈模拟一个队列
+ */
 public class Q8 {
     public static void main(String[] args) {
         QueueWithTwoStacks queue = new QueueWithTwoStacks();
         queue.push(1);
         queue.push(2);
         queue.push(3);
+        System.out.print(queue.pop() + " | ");
+        queue.push(4);
         while (!queue.isEmpty()) {
             System.out.print(queue.pop() + " | ");
         }

@@ -1,10 +1,13 @@
 package offer.atwo.three.one;
 
+/**
+ * 寻找二维数组中所在的位置
+ */
 public class FindInPartiallySortedMatrix {
 
     public static void main(String[] args) {
         int[][] matrix = {{1, 2, 8, 9}, {2, 4, 9, 12}, {4, 7, 10, 13}, {6, 8, 11, 15}};
-        find(matrix, 7);
+        find(matrix, 1);
     }
 
     public static void find(int[][] matrix, int a) {

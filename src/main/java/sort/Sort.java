@@ -40,7 +40,7 @@ class Sort {
         }
     }
 
-    //快速排序
+    // 快速排序
     public static void quickSort(int[] array) {
         quickSort(array, 0, array.length - 1);
     }
@@ -141,5 +141,36 @@ class Sort {
             }
 
         }
+    }
+}
+
+class QuickSort2 {
+    public static void te(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int idxValue = arr[right];
+        int idx = left;
+        for (int i = left; i < right; i++) {
+            if (arr[i] < idxValue) {
+                int temp = arr[i];
+                arr[i] = arr[idx];
+                arr[idx] = temp;
+                idx++;
+            }
+        }
+        arr[right] = arr[idx];
+        arr[idx] = idxValue;
+
+
+        te(arr, left, idx - 1);
+        te(arr, idx + 1, right);
+
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {11, 6, 7, 8, 2, 3, 4, 15, 9, 1, 3};
+        te(arr, 0, arr.length - 1);
+        System.out.println(Arrays.toString(arr));
     }
 }

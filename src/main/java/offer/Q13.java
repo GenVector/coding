@@ -2,17 +2,18 @@ package offer;
 
 public class Q13 {
     public static void main(String[] args) {
-        System.out.println(CuttingRope.maxProductAfterCutting(99));
-        System.out.println(CuttingRope.maxProductAfterCutting2(99));
+        System.out.println(CuttingRope.maxProductAfterCutting(11));
+        System.out.println(CuttingRope.maxProductAfterCutting2(11));
 
     }
 
     /*
      * 剪绳子 动态规划算法
+     * 给定一根长度为 n 的绳子，将其剪成若干段，使得每段长度的乘积最大。
      */
     static class CuttingRope {
 
-        //动态规划算法
+        // 动态规划算法
         public static long maxProductAfterCutting(int length) {
             if (length <= 1) {
                 return 0;
@@ -36,7 +37,7 @@ public class Q13 {
             return maxLength[length];
         }
 
-        //贪心算法
+        // 贪心算法
         public static long maxProductAfterCutting2(int length) {
             if (length <= 1) {
                 return 0;

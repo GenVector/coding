@@ -2,6 +2,9 @@ package offer;
 
 import offer.atwo.three.three.ListNode;
 
+/**
+ * 删除链表指定节点
+ */
 public class Q18 {
     public static void main(String[] args) {
         ListNode p4 = new ListNode(4, null);
@@ -10,7 +13,7 @@ public class Q18 {
         ListNode p1 = new ListNode(1, p2);
 
         //ListNode p5 = new ListNode(4, null);
-        DeleteNodeInList.deleteNode(p1, p1);
+        DeleteNodeInList.deleteNode(p1, p2);
 
         while (p1 != null) {
             System.out.print(p1.val + " | ");

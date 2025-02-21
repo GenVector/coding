@@ -47,8 +47,10 @@ public class OddEvenPartition {
         }
     }
 }
+
 /*
  * 如果要求奇数部分和偶数部分的相对顺序不变，可以使用以下方法
+ * 创建一个新数组，遍历原数组两次，第一次放入奇数，第二次放入偶数
  */
 class OddEvenPartitionStable {
     public static int[] partitionOddEvenStable(int[] nums) {
@@ -84,6 +86,30 @@ class OddEvenPartitionStable {
         System.out.print("分区后的数组（保持顺序）: ");
         for (int num : result) {
             System.out.print(num + " ");
+        }
+    }
+
+    /*
+     * 以下是手敲
+     */
+    public static void find(int[] arr) {
+        int i = 0;
+        int j = arr.length - 1;
+        while (i < j) {
+            // 判断是否是偶数
+            if (arr[i] % 2 == 0) {
+                i++;
+            }
+            // 判断是否是奇数
+            if (arr[j] % 2 != 0) {
+                j--;
+            }
+
+            if (i < j && arr[i] % 2 != 0 && arr[j] % 2 == 0) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
         }
     }
 }
