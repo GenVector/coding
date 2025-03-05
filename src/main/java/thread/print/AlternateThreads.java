@@ -2,6 +2,9 @@ package thread.print;
 
 import java.util.concurrent.Semaphore;
 
+/*
+ * 交替打印
+ */
 public class AlternateThreads {
 
     private static Semaphore semaphoreA = new Semaphore(1);
