@@ -1,6 +1,6 @@
 package coding2;
 
-/**
+/*
  * 查找两个字符串a,b中的最长公共子串
  */
 public class LongestCommonSubstring {
@@ -59,7 +59,6 @@ class LongestCommonSubstring2 {
                         index = i;
                     }
                 }
-
             }
         }
         return s1.substring(index - maxLength, index);

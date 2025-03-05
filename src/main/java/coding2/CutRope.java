@@ -1,5 +1,8 @@
 package coding2;
 
+/*
+ *剪绳子
+ */
 public class CutRope {
     public static int maxProductAfterCutting(int n) {
         if (n < 2) return 0;
@@ -10,18 +13,17 @@ public class CutRope {
         products[0] = 0;
         products[1] = 1;
         products[2] = 2;
-        products[3] = 3;
+        products[3] = 3; // 这个地方确实和上面的不一样 这里可以剪一段
         for (int i = 4; i <= n; i++) {
             for (int j = 2; j <= i / 2; j++) {
                 products[i] = Math.max(products[i], products[j] * products[i - j]);
-
             }
         }
         return products[n];
     }
 
     public static void main(String[] args) {
-        int n = 11; // 绳子长度
+        int n = 4; // 绳子长度
         int result = maxProductAfterCutting(n);
         System.out.println("最大乘积: " + result);
 

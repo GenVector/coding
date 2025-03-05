@@ -124,24 +124,6 @@ class Sort {
 
     }
 
-    public static void mergeArray(int[] arr, int left, int mid, int right) {
-        for (int i = left; i < mid; i++) {
-            if (arr[i] < arr[mid]) {
-                continue;
-            }
-            int temp = arr[i];
-            arr[i] = arr[mid];
-            arr[mid] = temp;
-            int j = mid;
-            while (j < right - 1 && arr[j] > arr[j + 1]) {
-                int tem = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = tem;
-                j++;
-            }
-
-        }
-    }
 }
 
 class QuickSort2 {

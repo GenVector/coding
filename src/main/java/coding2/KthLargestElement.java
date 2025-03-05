@@ -1,6 +1,5 @@
 package coding2;
 
-import java.util.Random;
 
 /*
 找出数组中第 k 大的数 输入k,和数组，输出第k大的数
@@ -23,7 +22,7 @@ public class KthLargestElement {
 
         // 对数组进行分区操作，返回 pivot 的最终位置
         // 分区后，所有小于 pivot 的元素都在其左侧，所有大于 pivot 的元素都在其右侧
-        int pivotIndex = partition(nums, left, right);
+        int pivotIndex = partition2(nums, left, right);
 
         // 如果 k 等于 pivot 的索引，说明找到了第 k 小的元素，直接返回
         if (k == pivotIndex) {
@@ -60,6 +59,25 @@ public class KthLargestElement {
         return storeIndex;
     }
 
+    private static int partition2(int[] nums, int left, int right) {
+        int i = left;
+        int j = right;
+        int pivotValue = nums[left];
+        while (i < j) {
+            while (i < j && nums[j] > pivotValue) {
+                j--;
+            }
+            while (i < j && nums[i] <= pivotValue) {
+                i++;
+            }
+            if (i < j) {
+                swap(nums, i, j);
+            }
+        }
+        swap(nums, left, i);
+        return i;
+    }
+
 
     private static void swap(int[] nums, int i, int j) {
         int temp = nums[i];
@@ -69,7 +87,7 @@ public class KthLargestElement {
 
     public static void main(String[] args) {
         int[] nums = {3, 22, 11, 4, 2, 2, 1, 5, 6, 4, 13}; // 示例数组
-        int k = 1; // 找出第 2 大的数
+        int k = 3; // 找出第 2 大的数
         int result = findKthLargest(nums, k);
         System.out.println("第 " + k + " 大的数是: " + result);
     }

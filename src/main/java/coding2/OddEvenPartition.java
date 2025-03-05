@@ -2,6 +2,7 @@ package coding2;
 
 /*
  * 输入一个 int 数组，返回一个数组，其中奇数都在左边，偶数都在右边
+ *
  */
 public class OddEvenPartition {
     public static int[] partitionOddEven(int[] nums) {
