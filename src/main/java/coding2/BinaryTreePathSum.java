@@ -8,7 +8,7 @@ import java.util.List;
 
 /*
  * 二叉树中找出所有路径，使得路径上的节点值之和等于 21
- * 这个是剪枝法
+ * 这个是剪枝法 也可以是个回溯法
  */
 public class BinaryTreePathSum {
     public List<List<Integer>> pathSum(TreeNode root, int sum) {

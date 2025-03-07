@@ -41,18 +41,5 @@ class Fibonacci {
         return n1;
     }
 
-    public static long fib3(long n) {
-        if (n == 0) {
-            return 0;
-        }
-        if (n == 1) {
-            return 1;
-        }
-        if (n == 2) {
-            return 2;
-        }
-        return fib3(n - 1) + fib3(n - 2);
-    }
-
 
 }

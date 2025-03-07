@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class ThreadPrint {
+public class AlternateThreads2 {
 
     private static final Object LOCK = new Object();
     private static String threadName = "A";

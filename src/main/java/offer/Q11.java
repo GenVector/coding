@@ -38,14 +38,15 @@ class StringPathInMatrix {
         int pathLength = 0;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                if (hasPathCore(matrix, rows, cols, row, col, str, pathLength, isVisited))
+                if (hasPathCore(matrix, rows, cols, row, col, str, pathLength, isVisited)) {
                     return true;
+                }
             }
         }
         return false;
     }
 
-    //二维数组下标的计算：row*cols+col
+    // 二维数组下标的计算：row*cols+col
     private boolean hasPathCore(char[] matrix, int rows, int cols, int row, int col, char[] str, int pathLength,
                                 boolean[] isVisited) {
         if (row < 0 || col < 0 || row >= rows || col >= cols || isVisited[row * cols + col]
