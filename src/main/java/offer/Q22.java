@@ -1,16 +1,19 @@
 package offer;
 
 import offer.atwo.three.three.ListNode;
+import org.junit.Test;
 
 import java.util.Stack;
 
-//题目：输入一个链表，输出该链表中倒数第k个结点。为了符合大多数人的习惯，
-//本题从1开始计数，即链表的尾结点是倒数第1个结点。例如一个链表有6个结点，
-//从头结点开始它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个结点是
-//值为4的结点。
+// 题目：输入一个链表，输出该链表中倒数第k个结点。为了符合大多数人的习惯，
+// 本题从1开始计数，即链表的尾结点是倒数第1个结点。例如一个链表有6个结点，
+// 从头结点开始它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个结点是
+// 值为4的结点。
 public class Q22 {
 }
-
+/*
+ * 思路：本题有三种解法:1.双指针法，2.栈，3.递归
+ */
 class KthNodeFromEnd {
     public ListNode findKthToTail1(ListNode head, int k) {
         if (head == null) {
@@ -159,5 +162,26 @@ class KthNodeFromEnd {
         demo.test4();
         demo.test5();
         demo.test6();
+    }
+
+
+    @Test
+    public void getKthFromEnd() {
+        // 这儿是个思路 返回值 数字+节点 即可返回node
+        ListNode node1 = new ListNode(1);
+        node1.setNext(new ListNode(2)).setNext(new ListNode(6)).setNext(new ListNode(7));
+        getK(node1, 3);
+
+    }
+
+    public static int getK(ListNode head, int idx) {
+        if (head == null) {
+            return 1;
+        }
+        int k = getK(head.next, idx);
+        if (k == idx) {
+            System.out.println(head.val);
+        }
+        return k + 1;
     }
 }

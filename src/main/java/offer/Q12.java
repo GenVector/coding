@@ -1,104 +1,11 @@
 package offer;
 
-/*
- * 题目：地上有一个m行n列的方格。
- * 一个机器人从坐标(0, 0)的格子开始移动，它每一次可以向左、右、上、下移动一格，但不能进入行坐标和列坐标的数位之和
- * 大于k的格子。例如，当k为18时，机器人能够进入方格(35, 37)，因为3+5+3+7=18。
- * 但它不能进入方格(35, 38)，因为3+5+3+8=19。请问该机器人能够到达多少个格子？
- * 回溯法
+/*  回溯法
+    后进先出
  */
 public class Q12 {
-
-}
-
-class RobotMove {
-    public int movingCount(int threshold, int rows, int cols) {
-        if (rows <= 0 || cols <= 0 || threshold < 0)
-            return 0;
-
-        boolean[] isVisited = new boolean[rows * cols];
-        int count = movingCountCore(threshold, rows, cols, 0, 0, isVisited); // 用两种方法试一下
-        return count;
-    }
-
-    private int movingCountCore(int threshold, int rows, int cols, int row, int col, boolean[] isVisited) {
-        if (row < 0 || col < 0 || row >= rows || col >= cols || isVisited[row * cols + col]
-                || cal(row) + cal(col) > threshold)
-            return 0;
-        isVisited[row * cols + col] = true;
-        return 1 + movingCountCore(threshold, rows, cols, row - 1, col, isVisited)
-                + movingCountCore(threshold, rows, cols, row + 1, col, isVisited)
-                + movingCountCore(threshold, rows, cols, row, col - 1, isVisited)
-                + movingCountCore(threshold, rows, cols, row, col + 1, isVisited);
-    }
-
-    private int cal(int num) {
-        int sum = 0;
-        while (num > 0) {
-            sum += num % 10;
-            num /= 10;
-        }
-        return sum;
-    }
-
-    // ========测试代码=========
-    void test(String testName, int threshold, int rows, int cols, int expected) {
-        if (testName != null)
-            System.out.print(testName + ":");
-
-        if (movingCount(threshold, rows, cols) == expected)
-            System.out.println("Passed.");
-        else
-            System.out.println("Failed.");
-    }
-
-    // 方格多行多列
-    void test1() {
-        test("Test1", 5, 10, 10, 21);
-    }
-
-    // 方格多行多列
-    void test2() {
-        test("Test2", 15, 20, 20, 359);
-    }
-
-    // 方格只有一行，机器人只能到达部分方格
-    void test3() {
-        test("Test3", 10, 1, 100, 29);
-    }
-
-    // 方格只有一行，机器人能到达所有方格
-    void test4() {
-        test("Test4", 10, 1, 10, 10);
-    }
-
-    // 方格只有一列，机器人只能到达部分方格
-    void test5() {
-        test("Test5", 15, 100, 1, 79);
-    }
-
-    // 方格只有一列，机器人能到达所有方格
-    void test6() {
-        test("Test6", 15, 10, 1, 10);
-    }
-
-    // 方格只有一行一列
-    void test7() {
-        test("Test7", 15, 1, 1, 1);
-    }
-
-    // 方格只有一行一列
-    void test8() {
-        test("Test8", 0, 1, 1, 1);
-    }
-
-    // 机器人不能进入任意一个方格
-    void test9() {
-        test("Test9", -10, 10, 10, 0);
-    }
-
     public static void main(String[] args) {
-        RobotMove demo = new RobotMove();
+        StringPathInMatrix demo = new StringPathInMatrix();
         demo.test1();
         demo.test2();
         demo.test3();
@@ -106,46 +13,204 @@ class RobotMove {
         demo.test5();
         demo.test6();
         demo.test7();
-        demo.test8();
-        demo.test9();
     }
-
-    public int getRange(int k, int rows, int cols) {
-        if (k < 0 || rows <= 0 || cols <= 0) {
-            return 0;
-        }
-        boolean[] isVisited = new boolean[rows * cols];
-        for (boolean b : isVisited) {
-            b = false;
-        }
-        return getRangeCore(k, rows, cols, 0, 0, isVisited);
-    }
-
-    public int getRangeCore(int k, int rows, int cols, int row, int col, boolean[] isVisited) {
-        if (row < 0 || col < 0 || row >= rows || col >= cols || isVisited[row * cols + col] || getCal(col, row) > k) {
-            return 0;
-        }
-        isVisited[row * cols + col] = true;
-        return 1 + getRangeCore(k, rows, cols, row - 1, col, isVisited)
-                + getRangeCore(k, rows, cols, row + 1, col, isVisited)
-                + getRangeCore(k, rows, cols, row, col - 1, isVisited)
-                + getRangeCore(k, rows, cols, row, col + 1, isVisited);
-
-    }
-
-    public int getCal(int i, int j) {
-        int sum = 0;
-        while (i > 10) {
-            sum += i % 10;
-            i = i / 10;
-        }
-        while (j > 10) {
-            sum += j % 10;
-            j = j / 10;
-        }
-        return sum;
-    }
-
 }
 
+/*
+ * 题目：请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有
+ * 字符的路径。路径可以从矩阵中任意一格开始，每一步可以在矩阵中向左、右、
+ * 上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入
+ * 该格子。例如在下面的3×4的矩阵中包含一条字符串“bfce”的路径（路径中的字
+ * 母用下划线标出）。但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个
+ * 字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。
+ * A B T G
+ * C F C S
+ * J D E H
+ */
+class StringPathInMatrix {
+
+    public boolean hasPath(char[] matrix, int rows, int cols, char[] str) {
+        if (matrix == null || rows < 1 || cols < 1 || str == null) {
+            return false;
+        }
+        boolean[] isVisited = new boolean[rows * cols];
+
+        int pathLength = 0;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (hasPathCore(matrix, rows, cols, row, col, str, pathLength, isVisited)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // 二维数组下标的计算：row*cols+col
+    private boolean hasPathCore(char[] matrix, int rows, int cols, int row, int col, char[] str, int pathLength,
+                                boolean[] isVisited) {
+        if (row < 0 || col < 0 || row >= rows || col >= cols || isVisited[row * cols + col]
+                || str[pathLength] != matrix[row * cols + col]) {
+            return false;
+
+        }
+        if (pathLength == str.length - 1) {
+            return true;
+        }
+        boolean hasPath = false;
+        isVisited[row * cols + col] = true;
+        hasPath = hasPathCore(matrix, rows, cols, row - 1, col, str, pathLength + 1, isVisited)
+                || hasPathCore(matrix, rows, cols, row + 1, col, str, pathLength + 1, isVisited)
+                || hasPathCore(matrix, rows, cols, row, col - 1, str, pathLength + 1, isVisited)
+                || hasPathCore(matrix, rows, cols, row, col + 1, str, pathLength + 1, isVisited);
+
+        if (!hasPath) {
+            isVisited[row * cols + col] = false;
+        }
+        return hasPath;
+    }
+
+    // BFCTB
+    public void test1() {
+        char[] matrix = "ABTGCFCSJDEH".toCharArray();
+        int rows = 3;
+        int cols = 4;
+        char[] str = "BFCTB".toCharArray();
+        if (hasPath(matrix, rows, cols, str))
+            System.out.println("Test1 passed.");
+        else
+            System.out.println("Test1 failed.");
+    }
+
+    // A B T G
+    // C F C S
+    // J D E H
+
+    // BFCE
+    public void test2() {
+        char[] matrix = "ABTGCFCSJDEH".toCharArray();
+        int rows = 3;
+        int cols = 4;
+        char[] str = "BFCE".toCharArray();
+        if (hasPath(matrix, rows, cols, str))
+            System.out.println("Test2 passed.");
+        else
+            System.out.println("Test2 failed.");
+    }
+
+    // matrix=null
+    public void test3() {
+        char[] matrix = null;
+        int rows = 0;
+        int cols = 0;
+        char[] str = "BFCE".toCharArray();
+        if (hasPath(matrix, rows, cols, str))
+            System.out.println("Test3 passed.");
+        else
+            System.out.println("Test3 failed.");
+    }
+
+    // str=null
+    public void test4() {
+        char[] matrix = "ABTGCFCSJDEH".toCharArray();
+        int rows = 3;
+        int cols = 4;
+        char[] str = null;
+        if (hasPath(matrix, rows, cols, str))
+            System.out.println("Test4 passed.");
+        else
+            System.out.println("Test4 failed.");
+    }
+
+    // A
+
+    // A
+    public void test5() {
+        char[] matrix = "A".toCharArray();
+        int rows = 1;
+        int cols = 1;
+        char[] str = "A".toCharArray();
+        if (hasPath(matrix, rows, cols, str))
+            System.out.println("Test5 passed.");
+        else
+            System.out.println("Test5 failed.");
+    }
+
+    // A
+
+    // B
+    public void test6() {
+        char[] matrix = "A".toCharArray();
+        int rows = 1;
+        int cols = 1;
+        char[] str = "B".toCharArray();
+        if (hasPath(matrix, rows, cols, str))
+            System.out.println("Test6 passed.");
+        else
+            System.out.println("Test6 failed.");
+    }
+
+    // AAAA
+    // AAAA
+    // AAAA
+
+    // AAAAAAAAAAAA
+    public void test7() {
+        char[] matrix = "AAAAAAAAAAAA".toCharArray();
+        int rows = 3;
+        int cols = 4;
+        char[] str = "AAAAAAAAAAAA".toCharArray();
+        if (hasPath(matrix, rows, cols, str))
+            System.out.println("Test7 passed.");
+        else
+            System.out.println("Test7 failed.");
+    }
+
+    int rows;
+    int cols;
+    int row;
+    int col;
+    int index = row * cols + col;
+
+    public static boolean hasPath2(char[] strs, int rows, int cols, char[] path) {
+        if (strs == null || strs.length == 0 || path == null || path.length == 0 || rows == 0 || cols == 0) {
+            return false;
+        }
+        boolean[] isVisited = new boolean[rows * cols + 1];
+
+        int pathLen = 0;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (core(strs, path, rows, cols, row, col, isVisited, pathLen)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean core(char[] strs, char[] path, int rows, int cols, int row, int col, boolean[] isVisited, int pathLen) {
+        if (strs == null || strs.length == 0 || path == null || path.length == 0 || col < 0 || row < 0 || row >= rows || col >= cols
+                || isVisited[row * cols + col]) {
+            return false;
+        }
+        if (strs[row * cols + col] != path[pathLen]) {
+            return false;
+        }
+        if (pathLen == path.length - 1) {
+            return true;
+        }
+        boolean hasPath = false;
+        isVisited[row * cols + col] = true;
+
+        hasPath = core(strs, path, rows, cols, row, col + 1, isVisited, pathLen + 1) || core(strs, path, rows, cols, row, col - 1, isVisited, pathLen + 1)
+                || core(strs, path, rows, cols, row + 1, col, isVisited, pathLen + 1) || core(strs, path, rows, cols, row - 1, col, isVisited, pathLen + 1);
+
+        if (!hasPath) {
+            isVisited[row * cols + col] = false;
+
+        }
+        return hasPath;
+    }
+}
 
