@@ -1,108 +1,108 @@
 package offer;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
-
-/**
- * 利用两个栈模拟一个队列
+/*
+ *题目：给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。
+ * 注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针。
  */
 public class Q8 {
-    public static void main(String[] args) {
-        QueueWithTwoStacks queue = new QueueWithTwoStacks();
-        queue.push(1);
-        queue.push(2);
-        queue.push(3);
-        System.out.print(queue.pop() + " | ");
-        queue.push(4);
-        while (!queue.isEmpty()) {
-            System.out.print(queue.pop() + " | ");
-        }
-    }
 
 }
 
-class QueueWithTwoStacks {
-    private Stack<Integer> inStack = new Stack<>();
-    private Stack<Integer> outStack = new Stack<>();
+class TreeLinkNode {
+    int val;
+    TreeLinkNode left = null;
+    TreeLinkNode right = null;
+    TreeLinkNode parent = null;
 
-    public boolean isEmpty() {
-        return inStack.isEmpty() && outStack.isEmpty();
+    TreeLinkNode(int val) {
+        this.val = val;
     }
+}
 
-    public void push(Integer num) {
+class NextNodeInBinaryTrees {
 
-        inStack.push(num);
-    }
-
-    public Integer pop() {
-        if (outStack.size() > 0) {
-            return outStack.pop();
-        } else if (inStack.size() > 0) {
-            while (inStack.size() > 0) {
-                outStack.push(inStack.pop());
+    public static TreeLinkNode getNext(TreeLinkNode pNode) {
+        if (pNode == null) {
+            throw new RuntimeException("pNode is null");
+        }
+        //存在右子树,返回右子树的左节点
+        if (pNode.right != null) {
+            TreeLinkNode node = pNode.right;
+            while (node.left != null) {
+                node = node.left;
             }
-            return outStack.pop();
+            return node;
         }
-        throw new RuntimeException("queue is null");
-    }
-
-}
-
-class StackWithQueue {
-
-    private Queue<Integer> queue1 = new LinkedList<>();
-    private Queue<Integer> queue2 = new LinkedList<>();
-
-    public static void main(String[] args) {
-        StackWithQueue stack = new StackWithQueue();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-        System.out.print(stack.pop() + " | ");
-        stack.push(5);
-        while (!stack.isEmpty()) {
-            System.out.print(stack.pop() + " | ");
-        }
-    }
-
-    public boolean isEmpty() {
-        return queue1.isEmpty() && queue2.isEmpty();
-    }
-
-    public Integer pop() {
-        if (queue1.isEmpty() && queue2.isEmpty()) {
+        if (pNode.parent == null) {
             return null;
         }
-        if (!queue2.isEmpty() && !queue1.isEmpty()) {
-            throw new RuntimeException("data error");
+        //是左子树时,直接返回父节点
+        if (pNode.parent.left == pNode) {
+            return pNode.parent;
         }
-        if (queue1.isEmpty()) {
-            Integer num;
-            while (queue2.size() > 1) {
-                num = queue2.poll();
-                queue1.offer(num);
+        //当它是父节点的右子树,  当父节点是父父节点的左子树时,为下一节点
+        if (pNode.parent.right == pNode) {
+            TreeLinkNode tem = pNode.parent;
+            while (tem.parent != null) {
+                if (tem.parent.left == tem) {
+                    return tem.parent;
+                }
             }
-            return queue2.poll();
-        } else {
-            Integer num;
-            while (queue1.size() > 1) {
-                num = queue1.poll();
-                queue2.offer(num);
-            }
-            return queue1.poll();
         }
+
+        return null;
 
     }
 
-    public void push(Integer num) {
-        if (queue1.isEmpty()) {
-            queue2.offer(num);
-        } else {
-            queue1.offer(num);
-        }
+
+    public void test1() {
+        TreeLinkNode node = null;
+        TreeLinkNode nextNode = getNext(node);
+        if (nextNode != null)
+            System.out.println(nextNode.val);
+        else
+            System.out.println("无下一结点");
     }
 
+    public void test2() {
+        TreeLinkNode node1 = new TreeLinkNode(1);
+        TreeLinkNode node2 = new TreeLinkNode(2);
+        TreeLinkNode node3 = new TreeLinkNode(3);
+        TreeLinkNode node4 = new TreeLinkNode(4);
+        node1.left = node2;
+        node1.right = node3;
+        node2.parent = node1;
+        node3.parent = node1;
+        node4.left = node1;
+        node1.parent = node4;
+        TreeLinkNode nextNodeOf1 = getNext(node1);
+        TreeLinkNode nextNodeOf2 = getNext(node2);
+        TreeLinkNode nextNodeOf3 = getNext(node3);
+        TreeLinkNode nextNodeOf4 = getNext(node4);
+        if (nextNodeOf1 != null)
+            System.out.println("1结点的下一个结点值为：" + nextNodeOf1.val);
+        else
+            System.out.println("1结点无下一结点");
+        if (nextNodeOf2 != null)
+            System.out.println("2结点的下一个结点值为：" + nextNodeOf2.val);
+        else
+            System.out.println("2结点无下一结点");
+        if (nextNodeOf3 != null)
+            System.out.println("3结点的下一个结点值为：" + nextNodeOf3.val);
+        else
+            System.out.println("3结点无下一结点");
+        if (nextNodeOf4 != null)
+            System.out.println("4结点的下一个结点值为：" + nextNodeOf4.val);
+        else
+            System.out.println("4结点无下一结点");
+    }
+
+    public static void main(String[] args) {
+        NextNodeInBinaryTrees demo = new NextNodeInBinaryTrees();
+        //System.out.print("test1:");
+        //demo.test1();
+        System.out.print("test2:");
+        demo.test2();
+    }
 }
 

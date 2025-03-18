@@ -1,8 +1,11 @@
 package sort;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 
-class Sort {
+public class Sort {
+
     public static void main(String[] args) {
 
         int[] arr = {6, 4, 8, 6, 5, 2, 1, 12, 3, 6};
@@ -38,6 +41,14 @@ class Sort {
             arr[maxIndex] = arr[arr.length - i - 1];
             arr[arr.length - i - 1] = tem;
         }
+    }
+
+
+    @Test
+    public void quickSortTest() {
+        int[] arr = {6, 4, 8, 6, 5, 2, 1, 12, 3, 6, 11, 10, 9};
+        quickSort(arr, 0, arr.length - 1);
+        Arrays.stream(arr).forEach(a -> System.out.print(a + " | "));
     }
 
     // 快速排序

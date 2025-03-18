@@ -1,16 +1,18 @@
 package offer;
 
 import offer.atwo.three.three.ListNode;
+import tree.btree.TreeNode;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-//题目：一个链表中包含环，如何找出环的入口结点？
+// 题目：一个链表中包含环，如何找出环的入口结点？
 public class Q23 {
 }
 
 class EntryNodeInListLoop {
-    public ListNode entryNodeOfLoop(ListNode head) {
+    public static ListNode entryNodeOfLoop(ListNode head) {
         Map<ListNode, ListNode> map = new HashMap<>();
         while (head != null) {
             if (map.containsKey(head)) {
@@ -58,7 +60,7 @@ class EntryNodeInListLoop {
         if (meetingNode == null)
             return null;
 
-        //计算环中结点的数目
+        // 计算环中结点的数目
         int count = 1;  //环中结点的数目
         ListNode pNode1 = meetingNode.next;
         while (pNode1 != meetingNode) {
@@ -66,7 +68,7 @@ class EntryNodeInListLoop {
             pNode1 = pNode1.next;
         }
 
-        //先移动pNode1，次数为count
+        // 先移动pNode1，次数为count
         pNode1 = head;
         for (int i = 1; i <= count; i++) {
             pNode1 = pNode1.next;
@@ -80,14 +82,12 @@ class EntryNodeInListLoop {
     }
 
     public static void main(String[] args) {
-        ListNode p5 = new ListNode(5, null);
-        ListNode p4 = new ListNode(4, p5);
-        ListNode p3 = new ListNode(3, p4);
-        ListNode p2 = new ListNode(2, p3);
-        ListNode p1 = new ListNode(1, p2);
-        p5.next = p5;
-        EntryNodeInListLoop demo = new EntryNodeInListLoop();
-        demo.entryNodeOfLoop(p1);
+        ListNode p1 = new ListNode(1);
+        p1.setNext(new ListNode(2)).setNext(new ListNode(3)).setNext(new ListNode(4))
+                .setNext(new ListNode(5)).setNext(new ListNode(6)).setNext(p1.next.next);
+
+        ListNode node = entryNodeOfLoop(p1);
+        System.out.println(node.val);
     }
 
 }

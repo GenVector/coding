@@ -1,12 +1,18 @@
-package offer.atwo.three.three;
+package offer;
 
 import tree.btree.TreeNode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-//已知二叉树的前序遍历和中序遍历还原二叉树
-public class ConstructBinaryTree {
+public class Q7 {
+
+}
+
+// 已知二叉树的前序遍历和中序遍历还原二叉树
+class ConstructBinaryTree {
 
 
     public static TreeNode reConstructBinaryTree(int[] pre, int[] in) {
@@ -109,11 +115,21 @@ public class ConstructBinaryTree {
     public static void main(String[] args) {
         int[] preOrder = {1, 2, 4, 7, 3, 5, 6, 8};
         int[] inOrder = {4, 7, 2, 1, 5, 3, 8, 6};
-        TreeNode treeNode = reConstructBinaryTree(preOrder, inOrder);
+        TreeNode treeNode = constructMain(preOrder, inOrder);
         TreeNode.levelOrder(treeNode);
+        System.out.println();
+        TreeNode.preOrder(treeNode);
+        System.out.println();
+        TreeNode.inOrder(treeNode);
+        System.out.println();
+        System.out.println("--------");
         mirrorRecursively(treeNode);
         System.out.println();
         TreeNode.levelOrder(treeNode);
+        System.out.println();
+        TreeNode.preOrder(treeNode);
+        System.out.println();
+        TreeNode.inOrder(treeNode);
         System.out.println();
         //treeNode = TreeNode.newTree1();
         leftViewPrint(treeNode);
@@ -122,4 +138,28 @@ public class ConstructBinaryTree {
 
     }
 
+    public static TreeNode construct2(int[] pre, int[] in,
+                                      int pStart, int pEnd, int iStart, int iEnd,
+                                      Map<Integer, Integer> inMap) {
+        if (pStart > pEnd || iStart > iEnd) {
+            return null;
+        }
+        TreeNode node = new TreeNode(pre[pStart]);
+
+        int inIdx = inMap.get(pre[pStart]);
+        int leftSize = inIdx - iStart;
+        node.left = construct2(pre, in, pStart + 1, pStart + leftSize, iStart, inIdx - 1, inMap);
+        node.right = construct2(pre, in, pStart + leftSize + 1, pEnd, inIdx + 1, iEnd, inMap);
+        return node;
+    }
+    public static TreeNode constructMain(int[] pre, int[] in){
+        if (pre == null || in == null || pre.length != in.length) {
+            throw new RuntimeException("数组不符合规范！");
+        }
+        Map<Integer, Integer> inMap = new HashMap<>();
+        for (int i = 0; i < in.length; i++) {
+            inMap.put(in[i], i);
+        }
+        return construct2(pre, in, 0, pre.length - 1, 0, in.length - 1, inMap);
+    }
 }

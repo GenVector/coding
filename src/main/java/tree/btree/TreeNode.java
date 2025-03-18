@@ -1,6 +1,9 @@
 package tree.btree;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -159,6 +162,9 @@ public class TreeNode {
         }
     }
 
+    /*
+     * 最大层数
+     */
     public static int level(TreeNode treeNode) {
         int left = 0;
         if (treeNode.left != null) {
@@ -188,6 +194,33 @@ public class TreeNode {
         treeNode.setLeft(new TreeNode(8));
         treeNode.setRight(new TreeNode(3)).setRight(new TreeNode(4)).setLeft(new TreeNode(9)).setLeft(new TreeNode(10));
         return root;
+    }
+
+    public static void levelOrderByLevel(TreeNode node) {
+
+        Queue<TreeNode> list = new LinkedList<>();
+        int level = 0;
+        Map<TreeNode, Integer> map = new HashMap<>();
+        map.put(node, level);
+
+        list.add(node);
+        while (list.size() > 0) {
+            TreeNode tem = list.poll();
+            int curLevel = map.get(tem);
+            if (curLevel != level) {
+                level = curLevel;
+                System.out.println();
+            }
+            System.out.print(tem.val + " | ");
+            if (tem.left != null) {
+                list.add(tem.left);
+                map.put(tem.left, level + 1);
+            }
+            if (tem.right != null) {
+                list.add(tem.right);
+                map.put(tem.right, level + 1);
+            }
+        }
     }
 
 }
