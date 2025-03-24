@@ -1,6 +1,5 @@
 package thread;
 
-import com.google.common.util.concurrent.*;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -10,12 +9,12 @@ public class ExecutorServiceTest {
 
     static Runnable runnable = () -> {
         //System.out.println("sub thread Group:" + Thread.currentThread().getThreadGroup());
-        System.out.println(Thread.currentThread().getName() + "runnable --");
+        System.out.println(Thread.currentThread().getName() + " runnable --");
         //throw new RuntimeException("error");
     };
 
     static Callable<Integer> callable = () -> {
-        System.out.println(Thread.currentThread().getName() + "callable --");
+        System.out.println(Thread.currentThread().getName() + " callable --");
 
         return 0;
     };
