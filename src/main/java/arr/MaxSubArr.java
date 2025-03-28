@@ -2,10 +2,8 @@ package arr;
 
 public class MaxSubArr {
     public static void main(String[] args) {
-        int[] arr = {1, 2, 4, 3, 2, -56, 3, 11, 4, -3, -3, 4, 8, -11, 9, 12};
+        int[] arr = {1, 2, 4, 3, 2, -6, 3, 11, 4, -3, -13, 4, 8, -11, 9, 12};
         maxSubArr(arr);
-        maxSubArr2(arr);
-
     }
 
     // 动态规划

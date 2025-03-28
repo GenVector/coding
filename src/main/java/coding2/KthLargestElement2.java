@@ -1,5 +1,6 @@
 package coding2;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class KthLargestElement2 {
@@ -26,5 +27,11 @@ public class KthLargestElement2 {
         int k = 2; // 找出第 2 大的数
         int result = findKthLargest(nums, k);
         System.out.println("第 " + k + " 大的数是: " + result);
+    }
+
+    public static int findKthLargest2(int[] nums, int k) {
+        int a = Arrays.stream(nums).sorted().skip(nums.length - k).findFirst().orElseThrow();
+        return a;
+
     }
 }
