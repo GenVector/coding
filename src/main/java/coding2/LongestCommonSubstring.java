@@ -11,6 +11,9 @@ public class LongestCommonSubstring {
         System.out.println(longestCommonSubstring(s1, s2));
     }
 
+    /*
+     * 暴力解法
+     */
     public static String longestCommonSubstring(String s1, String s2) {
 
         String max = "";
@@ -37,6 +40,9 @@ public class LongestCommonSubstring {
 
 }
 
+/*
+ * 动态规划解法
+ */
 class LongestCommonSubstring2 {
     public static void main(String[] args) {
         String s1 = "a1b11cdfsabcdfg2ghg11g";
